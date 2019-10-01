@@ -9,8 +9,7 @@ const bodyParser = express.json();
 
 lvlRouter
     .route('/')
-    .all(requireAuth)
-    .get((req, res) => {
+    .get(requireAuth, (req, res) => {
         const knex = req.app.get('db');
         levelService.getUserLvlByUserId(knex, req.user.id)
         .then(lvl => {
@@ -19,18 +18,16 @@ lvlRouter
     })
     .post(bodyParser, (req, res, next) => {
         const knex = req.app.get('db');
-        const { book_id, book_status, rating, notes } = req.body;
-        const newUserBook = { book_id, book_status, rating, notes };
+        const { user_id } = req.body;
+        const newUserLvl= { user_id };
 
-        for (const [key, value] of Object.entries(newUserBook))
+        for (const [key, value] of Object.entries(newUserLvl))
             if (value == null){
                 return res.status(400).json({
                 error: { message: `Missing '${key}' in request body` }
             })}
-        
-        newUserBook.user_id = req.user.id;   
 
-        levelService.insertUserBook(knex, newUserBook)
+        levelService.insertUserLvl(knex, newUserLvl)
         .then(() => {
             res.status(201).end();
         })
