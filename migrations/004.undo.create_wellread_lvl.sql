@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS wellread_lvl;
