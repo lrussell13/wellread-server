@@ -3,7 +3,7 @@
 Live App: https://wellread.lancebryanrussell.now.sh/
 Client Repo: https://github.com/lrussell13/wellread
 
-![screenshots](images/readme-image.png)
+![screenshots](src/images/readme-image.png)
 
 ## About
 
