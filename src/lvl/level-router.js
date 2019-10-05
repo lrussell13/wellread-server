@@ -37,13 +37,6 @@ lvlRouter
 lvlRouter
     .route('/:id')
     .all(requireAuth)
-    .get((req, res) => {
-        const knex = req.app.get('db');
-        levelService.getUserBooksById(knex, req.params.id)
-        .then(books => {
-            res.json(books);
-        });
-    })
     .delete((req, res, next) => {
         levelService.deleteUserBook(req.app.get('db'), req.params.id)
         .then(numRowsAffected => {

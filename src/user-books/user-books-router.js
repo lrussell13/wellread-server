@@ -7,15 +7,6 @@ const { requireAuth } = require('../middleware/jwt-auth')
 const userBooksRouter = express.Router();
 const bodyParser = express.json();
 
-const seralizeBook = book => ({
-    id: book.id,
-    user_id: book.user_id,
-    book_id: book.book_id,
-    book_status: book.book_status,
-    rating: book.rating,
-    notes: xss(book.notes)
-})
-
 userBooksRouter
     .route('/')
     .all(requireAuth)

@@ -9,13 +9,6 @@ const bodyParser = express.json();
 booksRouter
     .route('/')
     .all(requireAuth)
-    .get((req, res) => {
-        const knex = req.app.get('db');
-        booksService.getBooks(knex)
-        .then(books => {
-            res.json(books);
-        });
-    })
     .post(bodyParser, (req, res, next) => {
         const knex = req.app.get('db');
         const { title, author, cover_i, isbn, oclc } = req.body;
